@@ -8,19 +8,67 @@ namespace ExpITFunctionsLab
 {
     class Program
     {
+
+        //enum jobLevel { Employee, FirstLevelManager, SecondLevelManager, Director, CEO };
+
         static void Main(string[] args)
         {
+
+            bool parse;
+            int empLevel;
+
+            //define levels
+            string[] jobLevel = {"Employee", "FirstLevelManager", "SecondLevelManager", "Director", "CEO"};
+
+            //prompt user for their level
+           
+            for (int i = 0; i <5; i++)
+            {
+                Console.WriteLine(i + ": " + jobLevel[i]);
+            }
+            
+            do
+            {
+                Console.WriteLine("Please enter your rank within HappyFace, Inc.:");
+                parse = Int32.TryParse(Console.ReadLine(), out empLevel);
+            } while (!parse || empLevel < 0 || empLevel > 5);
+
+            
             //prompt user for input
             Console.WriteLine("What is the decription of the item?");
             string itemDescription = Console.ReadLine();
            
             double itemPrice;
-            bool parse;
+            
             do {
                 Console.WriteLine("What is the price of the item?");
                 parse = Double.TryParse(Console.ReadLine(), out itemPrice);
             } while (!parse);
-            if (firstLevelMgr(itemDescription, itemPrice))
+
+            bool approved = false;
+            switch (empLevel)
+            {
+                case 0:
+                    approved = firstLevelMgr(itemDescription, itemPrice);
+                    break;
+                case 1:
+                    approved = secondLevelMgr(itemDescription, itemPrice);
+                    break;
+                case 2:
+                    approved = director(itemDescription, itemPrice);
+                    break;
+                case 3:
+                    approved = ceo(itemDescription, itemPrice);
+                    break;
+                case 4:
+                    approved = true;
+                    break;
+                default:
+                    Console.WriteLine("I am confused.");
+                    break;
+            }
+
+            if (approved)
             {
                 Console.WriteLine("Your request is approved!");
             }
@@ -30,7 +78,7 @@ namespace ExpITFunctionsLab
             }
 
             Console.WriteLine();    //whitespace
-            Console.WriteLine("Press any key to exit.");
+            Console.WriteLine("Press return to exit.");
             Console.Read();
 
         }
