@@ -20,7 +20,18 @@ namespace ExpITFunctionsLab
                 Console.WriteLine("What is the price of the item?");
                 parse = Double.TryParse(Console.ReadLine(), out itemPrice);
             } while (!parse);
-            firstLevelMgr(itemDescription, itemPrice);
+            if (firstLevelMgr(itemDescription, itemPrice))
+            {
+                Console.WriteLine("Your request is approved!");
+            }
+            else
+            {
+                Console.WriteLine("Sorry, your request is denied!");
+            }
+
+            Console.WriteLine();    //whitespace
+            Console.WriteLine("Press any key to exit.");
+            Console.Read();
 
         }
 
@@ -38,6 +49,7 @@ namespace ExpITFunctionsLab
             }
 
             //otherwise approve!  we are liberal managers
+            Console.WriteLine("Approved by the first level manager.");
             return true;
         }
 
@@ -55,6 +67,7 @@ namespace ExpITFunctionsLab
             }
 
             //otherwise approve!  we are liberal managers
+            Console.WriteLine("Approved by the second level manager.");
             return true;
         }
 
@@ -73,12 +86,14 @@ namespace ExpITFunctionsLab
             }
 
             //otherwise approve!  we are liberal managers
+            Console.WriteLine("Approved by the director.");
             return true;
         }
 
         static bool ceo(string description, double price)
         {
             //our CEO loves us and wants us to be happy!
+            Console.WriteLine("Approved by the CEO.");
             return true;
         }
 
