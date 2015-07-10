@@ -134,7 +134,7 @@ namespace ExpITFunctionsLab
             }
 
             //otherwise approve!  we are liberal managers
-            Console.WriteLine("Cponsidered by the director.");
+            Console.WriteLine("Considered by the director.");
             return whim();
         }
 
@@ -162,6 +162,7 @@ namespace ExpITFunctionsLab
             Console.WriteLine("Considered by the CEO.");
             return whim();
         }
+
         static bool boardOfDirectors(string description, double price)
         {
             if (description.ToLower().Contains("scientology"))
@@ -170,8 +171,10 @@ namespace ExpITFunctionsLab
             }
             return false;
         }
+
         static bool whim()
         {
+            //models a random true/false decision
             Random rnd = new Random();
             int rad = rnd.Next(0, 2); // creates a number between 0 and 1
             if (rad == 0)
