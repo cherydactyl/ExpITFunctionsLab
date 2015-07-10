@@ -20,13 +20,13 @@ namespace ExpITFunctionsLab
             //define levels
             string[] jobLevel = {"Employee", "FirstLevelManager", "SecondLevelManager", "Director", "CEO"};
 
-            //prompt user for their level
-           
+            //prompt user for their level           
             for (int i = 0; i <5; i++)
             {
                 Console.WriteLine(i + ": " + jobLevel[i]);
             }
             
+            //repeat prompting until we get a recognizable level
             do
             {
                 Console.WriteLine("Please enter your rank within HappyFace, Inc.:");
@@ -61,7 +61,7 @@ namespace ExpITFunctionsLab
                     approved = ceo(itemDescription, itemPrice);
                     break;
                 case 4:
-                    approved = true;
+                    approved = boardOfDirectors(itemDescription, itemPrice);
                     break;
                 default:
                     Console.WriteLine("I am confused.");
@@ -140,9 +140,31 @@ namespace ExpITFunctionsLab
 
         static bool ceo(string description, double price)
         {
+            //check if the request will ruin the company
+            //illegal activity, unethical activity, or over $100,000
+            if (description.ToLower().Contains("cocaine")
+                || description.ToLower().Contains("gambling")
+                || description.ToLower().Contains("hookers"))   //CEO thinks a single hooker would be okay              
+            {
+                return false;
+            }
+            //cannot approve if over 1000, kick it up a level!
+            if (price > 100000)
+            {
+                return boardOfDirectors(description, price);
+            }
+
             //our CEO loves us and wants us to be happy!
             Console.WriteLine("Approved by the CEO.");
             return true;
+        }
+        static bool boardOfDirectors(string description, double price)
+        {
+            if (description.ToLower().Contains("scientology"))
+            {
+                return true;
+            }
+            return false;
         }
 
     }
