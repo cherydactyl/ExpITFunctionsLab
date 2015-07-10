@@ -97,8 +97,8 @@ namespace ExpITFunctionsLab
             }
 
             //otherwise approve!  we are liberal managers
-            Console.WriteLine("Approved by the first level manager.");
-            return true;
+            Console.WriteLine("Considered by the first level manager.");
+            return whim();
         }
 
         static bool secondLevelMgr(string description, double price)
@@ -115,8 +115,8 @@ namespace ExpITFunctionsLab
             }
 
             //otherwise approve!  we are liberal managers
-            Console.WriteLine("Approved by the second level manager.");
-            return true;
+            Console.WriteLine("Considered by the second level manager.");
+            return whim();
         }
 
         static bool director(string description, double price)
@@ -134,29 +134,33 @@ namespace ExpITFunctionsLab
             }
 
             //otherwise approve!  we are liberal managers
-            Console.WriteLine("Approved by the director.");
-            return true;
+            Console.WriteLine("Cponsidered by the director.");
+            return whim();
         }
 
         static bool ceo(string description, double price)
         {
             //check if the request will ruin the company
-            //illegal activity, unethical activity, or over $100,000
+            //illegal activity, unethical activity, etc.
             if (description.ToLower().Contains("cocaine")
+                || description.ToLower().Contains("heroin")
+                || description.ToLower().Contains("blackjack")
+                || description.ToLower().Contains("drugs")
                 || description.ToLower().Contains("gambling")
+                || description.ToLower().Contains("bribe")
                 || description.ToLower().Contains("hookers"))   //CEO thinks a single hooker would be okay              
             {
                 return false;
             }
-            //cannot approve if over 1000, kick it up a level!
+            //cannot approve if over 100000, kick it up a level!
             if (price > 100000)
             {
                 return boardOfDirectors(description, price);
             }
 
             //our CEO loves us and wants us to be happy!
-            Console.WriteLine("Approved by the CEO.");
-            return true;
+            Console.WriteLine("Considered by the CEO.");
+            return whim();
         }
         static bool boardOfDirectors(string description, double price)
         {
@@ -164,6 +168,14 @@ namespace ExpITFunctionsLab
             {
                 return true;
             }
+            return false;
+        }
+        static bool whim()
+        {
+            Random rnd = new Random();
+            int rad = rnd.Next(0, 2); // creates a number between 0 and 1
+            if (rad == 0)
+                return true;
             return false;
         }
 
