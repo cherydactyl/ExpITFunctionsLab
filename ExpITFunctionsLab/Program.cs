@@ -174,7 +174,7 @@ namespace ExpITFunctionsLab
 
         static bool whim()
         {
-            //models a random true/false decision
+            //models a random true/false decision   
             Random rnd = new Random();
             int rad = rnd.Next(0, 2); // creates a number between 0 and 1
             if (rad == 0)
